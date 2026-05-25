@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SosialKita — Social Media Modern</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ========== LOADING SCREEN ========== -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <i class="fa-solid fa-globe"></i>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-bar-fill"></div>
+            </div>
+            <p class="loader-text">Memuat SosialKita...</p>
+        </div>
+    </div>
+
+    <!-- ========== TOAST CONTAINER ========== -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- ========== HALAMAN AUTH ========== -->
+    <section id="authPage" class="auth-page hidden">
+        <div class="auth-left">
+            <div class="auth-brand">
+                <i class="fa-solid fa-globe"></i>
+                <h1>SosialKita</h1>
+                <p>Hubungkan dirimu dengan dunia. Berbagi cerita, momen, dan inspirasi bersama jutaan orang.</p>
+            </div>
+            <div class="auth-features">
+                <div class="auth-feature">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Realtime & Cepat</span>
+                </div>
+                <div class="auth-feature">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Aman & Privat</span>
+                </div>
+                <div class="auth-feature">
+                    <i class="fa-solid fa-palette"></i>
+                    <span>Desain Modern</span>
+                </div>
+            </div>
+        </div>
+        <div class="auth-right">
+            <!-- Form Login -->
+            <div id="loginForm" class="auth-form">
+                <h2>Masuk ke Akun</h2>
+                <p class="auth-subtitle">Selamat datang kembali!</p>
+
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="loginEmail" placeholder="nama@email.com" autocomplete="email">
+                    </div>
+                    <span class="form-error" id="loginEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Masukkan password" autocomplete="current-password">
+                        <button type="button" class="toggle-password" data-target="loginPassword">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="form-error" id="loginPasswordError"></span>
+                </div>
+
+                <button id="loginBtn" class="btn btn-primary btn-full">
+                    <span class="btn-text">Masuk</span>
+                    <span class="btn-loader hidden"><i class="fa-solid fa-spinner fa-spin"></i></span>
+                </button>
+
+                <div class="auth-divider">
+                    <span>atau</span>
+                </div>
+
+                <p class="auth-switch">
+                    Belum punya akun? <a href="#" id="showRegister">Daftar sekarang</a>
+                </p>
+            </div>
+
+            <!-- Form Register -->
+            <div id="registerForm" class="auth-form hidden">
+                <h2>Buat Akun Baru</h2>
+                <p class="auth-subtitle">Bergabung dengan komunitas kami</p>
+
+                <div class="form-group">
+                    <label for="regName">Nama Lengkap</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="regName" placeholder="Nama lengkap kamu" autocomplete="name">
+                    </div>
+                    <span class="form-error" id="regNameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="email" id="regEmail" placeholder="nama@email.com" autocomplete="email">
+                    </div>
+                    <span class="form-error" id="regEmailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="regPassword" placeholder="Minimal 6 karakter" autocomplete="new-password">
+                        <button type="button" class="toggle-password" data-target="regPassword">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="form-error" id="regPasswordError"></span>
+                    <div class="password-strength" id="passwordStrength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="regConfirm">Konfirmasi Password</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="regConfirm" placeholder="Ulangi password" autocomplete="new-password">
+                    </div>
+                    <span class="form-error" id="regConfirmError"></span>
+                </div>
+
+                <button id="registerBtn" class="btn btn-primary btn-full">
+                    <span class="btn-text">Daftar</span>
+                    <span class="btn-loader hidden"><i class="fa-solid fa-spinner fa-spin"></i></span>
+                </button>
+
+                <div class="auth-divider">
+                    <span>atau</span>
+                </div>
+
+                <p class="auth-switch">
+                    Sudah punya akun? <a href="#" id="showLogin">Masuk di sini</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== HALAMAN UTAMA APP ========== -->
+    <section id="appPage" class="app-page hidden">
+
+        <!-- ===== NAVBAR ===== -->
+        <nav class="navbar">
+            <div class="navbar-left">
+                <a href="#" class="navbar-logo">
+                    <i class="fa-solid fa-globe"></i>
+                    <span class="logo-text">SosialKita</span>
+                </a>
+                <div class="navbar-search" id="searchWrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="searchInput" placeholder="Cari pengguna...">
+                    <div id="searchResults" class="search-results hidden"></div>
+                </div>
+            </div>
+
+            <div class="navbar-center">
+                <a href="#" class="nav-item active" data-tab="home">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="friends">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span>Teman</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="watch">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Tonton</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="marketplace">
+                    <i class="fa-solid fa-store"></i>
+                    <span>Market</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="groups">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Grup</span>
+                </a>
+            </div>
+
+            <div class="navbar-right">
+                <!-- Chat Toggle -->
+                <button class="nav-icon-btn" id="chatToggle" title="Chat">
+                    <i class="fa-brands fa-facebook-messenger"></i>
+                    <span class="badge hidden" id="chatBadge">0</span>
+                </button>
+
+                <!-- Notifications -->
+                <div class="dropdown" id="notifDropdown">
+                    <button class="nav-icon-btn" id="notifBtn" title="Notifikasi">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="badge hidden" id="notifBadge">0</span>
+                    </button>
+                    <div class="dropdown-menu notif-menu hidden" id="notifMenu">
+                        <div class="dropdown-header">
+                            <h3>Notifikasi</h3>
+                            <button id="markAllRead">Tandai semua dibaca</button>
+                        </div>
+                        <div id="notifList" class="notif-list">
+                            <p class="empty-state-sm">Belum ada notifikasi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dark Mode -->
+                <button class="nav-icon-btn" id="darkModeToggle" title="Mode Gelap">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+
+                <!-- User Menu -->
+                <div class="dropdown" id="userDropdown">
+                    <button class="nav-user-btn" id="userBtn">
+                        <img id="navAvatar" src="" alt="Avatar">
+                        <span id="navName">User</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu user-menu hidden" id="userMenu">
+                        <a href="#" id="editProfileBtn">
+                            <i class="fa-solid fa-user-pen"></i>
+                            <span>Edit Profil</span>
+                        </a>
+                        <a href="#" id="viewProfileBtn">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Lihat Profil</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" id="logoutBtn" class="danger">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span>Keluar</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="nav-icon-btn mobile-only" id="mobileMenuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- ===== KONTEN UTAMA ===== -->
+        <div class="main-layout">
+
+            <!-- Sidebar Kiri -->
+            <aside class="sidebar sidebar-left" id="sidebarLeft">
+                <div class="sidebar-card user-card" id="sidebarUserCard">
+                    <img id="sidebarAvatar" src="" alt="Avatar" class="user-card-avatar">
+                    <div class="user-card-info">
+                        <h3 id="sidebarName">User</h3>
+                        <p id="sidebarBio">Bio kamu</p>
+                    </div>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="#" class="sidebar-link active" data-tab="home">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Beranda</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-tab="friends">
+                        <i class="fa-solid fa-user-group"></i>
+                        <span>Teman</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-tab="watch">
+                        <i class="fa-solid fa-play"></i>
+                        <span>Tonton</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-tab="marketplace">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Marketplace</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-tab="groups">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Grup</span>
+                    </a>
+                    <a href="#" class="sidebar-link" id="sidebarChatBtn">
+                        <i class="fa-brands fa-facebook-messenger"></i>
+                        <span>Pesan</span>
+                    </a>
+                    <a href="#" class="sidebar-link" id="sidebarNotifBtn">
+                        <i class="fa-solid fa-bell"></i>
+                        <span>Notifikasi</span>
+                    </a>
+                </nav>
+                <div class="sidebar-footer">
+                    <p>SosialKita &copy; 2026</p>
+                </div>
+            </aside>
+
+            <!-- Feed Area -->
+            <main class="feed-area" id="feedArea">
+                <!-- Tab: Home (Feed) -->
+                <div class="tab-content active" id="tab-home">
+                    <!-- Buat Postingan -->
+                    <div class="card create-post-card">
+                        <div class="create-post-top">
+                            <img id="createPostAvatar" src="" alt="Avatar">
+                            <button class="create-post-trigger" id="createPostTrigger">
+                                Apa yang kamu pikirkan, <span id="createPostName">User</span>?
+                            </button>
+                        </div>
+                        <div class="create-post-actions">
+                            <button class="create-post-action" id="addImageBtn">
+                                <i class="fa-solid fa-image" style="color:#45bd62"></i>
+                                <span>Foto</span>
+                            </button>
+                            <button class="create-post-action">
+                                <i class="fa-solid fa-face-smile" style="color:#f7b928"></i>
+                                <span>Sentimen</span>
+                            </button>
+                        </div>
+                        <input type="file" id="postImageInput" accept="image/*" class="hidden">
+                    </div>
+
+                    <!-- Daftar Postingan -->
+                    <div id="postsContainer" class="posts-container">
+                        <!-- Postingan akan di-render di sini oleh JavaScript -->
+                    </div>
+
+                    <!-- Loading Indicator untuk Infinite Scroll -->
+                    <div id="feedLoader" class="feed-loader hidden">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                        <span>Memuat postingan...</span>
+                    </div>
+
+                    <!-- End of Feed -->
+                    <div id="feedEnd" class="feed-end hidden">
+                        <p>Kamu sudah melihat semua postingan</p>
+                    </div>
+                </div>
+
+                <!-- Tab: Teman -->
+                <div class="tab-content hidden" id="tab-friends">
+                    <div class="card">
+                        <h2 class="card-title">Temukan Teman</h2>
+                        <div class="search-friends">
+                            <input type="text" id="friendSearchInput" placeholder="Cari nama atau email...">
+                        </div>
+                        <div id="friendSearchResults" class="friends-grid"></div>
+                    </div>
+                    <div class="card">
+                        <h2 class="card-title">Permintaan Teman</h2>
+                        <div id="friendRequests" class="friends-list">
+                            <p class="empty-state-sm">Belum ada permintaan</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2 class="card-title">Teman Kamu</h2>
+                        <div id="friendsList" class="friends-grid">
+                            <p class="empty-state-sm">Belum ada teman</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Watch -->
+                <div class="tab-content hidden" id="tab-watch">
+                    <div class="card">
+                        <h2 class="card-title"><i class="fa-solid fa-play"></i> Tonton</h2>
+                        <div class="empty-state">
+                            <i class="fa-solid fa-video"></i>
+                            <h3>Video Segera Hadir</h3>
+                            <p>Fitur video sedang dalam pengembangan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Marketplace -->
+                <div class="tab-content hidden" id="tab-marketplace">
+                    <div class="card">
+                        <h2 class="card-title"><i class="fa-solid fa-store"></i> Marketplace</h2>
+                        <div class="empty-state">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            <h3>Marketplace Segera Hadir</h3>
+                            <p>Fitur jual beli sedang dalam pengembangan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Groups -->
+                <div class="tab-content hidden" id="tab-groups">
+                    <div class="card">
+                        <h2 class="card-title"><i class="fa-solid fa-users"></i> Grup</h2>
+                        <div class="empty-state">
+                            <i class="fa-solid fa-people-group"></i>
+                            <h3>Grup Segera Hadir</h3>
+                            <p>Fitur grup sedang dalam pengembangan</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab: Profil -->
+                <div class="tab-content hidden" id="tab-profile">
+                    <div class="profile-header">
+                        <div class="profile-cover" id="profileCover">
+                            <div class="profile-cover-overlay">
+                                <button class="btn btn-sm" id="changeCoverBtn">
+                                    <i class="fa-solid fa-camera"></i> Ganti Cover
+                                </button>
+                            </div>
+                        </div>
+                        <div class="profile-info-row">
+                            <div class="profile-avatar-wrapper">
+                                <img id="profileAvatar" src="" alt="Avatar" class="profile-avatar-large">
+                                <button class="avatar-edit-btn" id="changeAvatarBtn">
+                                    <i class="fa-solid fa-camera"></i>
+                                </button>
+                            </div>
+                            <div class="profile-info-text">
+                                <h2 id="profileName">User</h2>
+                                <p id="profileBio" class="profile-bio">Bio</p>
+                                <p id="profileStats" class="profile-stats">
+                                    <span id="profilePostCount">0</span> Postingan &middot;
+                                    <span id="profileFollowerCount">0</span> Pengikut &middot;
+                                    <span id="profileFollowingCount">0</span> Mengikuti
+                                </p>
+                                <button class="btn btn-primary btn-sm hidden" id="followProfileBtn">Ikuti</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="profilePosts" class="posts-container"></div>
+                </div>
+            </main>
+
+            <!-- Sidebar Kanan -->
+            <aside class="sidebar sidebar-right" id="sidebarRight">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">Iklan Sponsor</h3>
+                    <div class="sponsored-item">
+                        <div class="sponsored-img" style="background:linear-gradient(135deg,#0066ff,#00ccff)"></div>
+                        <p class="sponsored-text">Belajar coding gratis di SosialKita Academy</p>
+                    </div>
+                    <div class="sponsored-item">
+                        <div class="sponsored-img" style="background:linear-gradient(135deg,#ff6600,#ffcc00)"></div>
+                        <p class="sponsored-text">Promo spesial bulan ini! Diskon 50%</p>
+                    </div>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">Kontak Online</h3>
+                    <div id="contactsList" class="contacts-list">
+                        <p class="empty-state-sm">Belum ada kontak</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- ===== CHAT SIDEBAR ===== -->
+        <div class="chat-sidebar hidden" id="chatSidebar">
+            <div class="chat-sidebar-header">
+                <h3>Pesan</h3>
+                <button class="chat-close-btn" id="chatClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="chat-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="chatSearchInput" placeholder="Cari percakapan...">
+            </div>
+            <div id="chatList" class="chat-list">
+                <p class="empty-state-sm">Belum ada percakapan</p>
+            </div>
+        </div>
+
+        <!-- ===== CHAT WINDOW ===== -->
+        <div class="chat-window hidden" id="chatWindow">
+            <div class="chat-window-header">
+                <div class="chat-window-user">
+                    <img id="chatWindowAvatar" src="" alt="">
+                    <div>
+                        <h4 id="chatWindowName">User</h4>
+                        <span class="online-dot" id="chatWindowStatus">Offline</span>
+                    </div>
+                </div>
+                <button class="chat-close-btn" id="chatWindowClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Pesan akan di-render di sini -->
+            </div>
+            <div class="chat-input-area">
+                <button class="chat-attach-btn" id="chatAttachBtn" title="Kirim gambar">
+                    <i class="fa-solid fa-image"></i>
+                </button>
+                <input type="file" id="chatImageInput" accept="image/*" class="hidden">
+                <input type="text" id="chatMessageInput" placeholder="Ketik pesan...">
+                <button class="chat-send-btn" id="chatSendBtn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ========== MODAL: BUAT POSTINGAN ========== -->
+    <div class="modal-overlay hidden" id="createPostModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Buat Postingan</h3>
+                <button class="modal-close" data-close="createPostModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-user">
+                    <img id="modalAvatar" src="" alt="Avatar">
+                    <span id="modalUserName">User</span>
+                </div>
+                <textarea id="postContentInput" placeholder="Apa yang kamu pikirkan?" rows="4"></textarea>
+                <div id="imagePreviewArea" class="image-preview-area hidden">
+                    <img id="imagePreview" src="" alt="Preview">
+                    <button class="image-remove-btn" id="removeImageBtn">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-actions-bar">
+                    <span>Tambah ke postingan</span>
+                    <button class="modal-action-btn" id="modalAddImageBtn">
+                        <i class="fa-solid fa-image" style="color:#45bd62"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-full" id="submitPostBtn">
+                    <span class="btn-text">Posting</span>
+                    <span class="btn-loader hidden"><i class="fa-solid fa-spinner fa-spin"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MODAL: EDIT PROFIL ========== -->
+    <div class="modal-overlay hidden" id="editProfileModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Edit Profil</h3>
+                <button class="modal-close" data-close="editProfileModal">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="edit-avatar-section">
+                    <img id="editAvatar" src="" alt="Avatar" class="edit-avatar">
+                    <div>
+                        <button class="btn btn-sm btn-outline" id="editAvatarBtn">Ganti Foto</button>
+                        <input type="file" id="avatarInput" accept="image/*" class="hidden">
+                        <p class="hint">JPG, PNG maks. 5MB</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editName">Nama</label>
+                    <input type="text" id="editName" placeholder="Nama lengkap">
+                </div>
+                <div class="form-group">
+                    <label for="editBio">Bio</label>
+                    <textarea id="editBio" placeholder="Ceritakan tentang dirimu" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" data-close="editProfileModal">Batal</button>
+                <button class="btn btn-primary" id="saveProfileBtn">
+                    <span class="btn-text">Simpan</span>
+                    <span class="btn-loader hidden"><i class="fa-solid fa-spinner fa-spin"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MODAL: IMAGE VIEWER ========== -->
+    <div class="modal-overlay hidden" id="imageViewerModal">
+        <div class="image-viewer">
+            <button class="image-viewer-close" data-close="imageViewerModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="imageViewerImg" src="" alt="Full size">
+        </div>
+    </div>
+
+    <!-- ========== FIREBASE SDK (Compat v10) ========== -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+
+    <!-- App Scripts -->
+    <script src="firebase.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
